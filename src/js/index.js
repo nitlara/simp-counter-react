@@ -2,7 +2,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-
+// get our fontawesome imports
+import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //include bootstrap npm library into the bundle
 import "bootstrap";
 
@@ -10,12 +12,11 @@ import "bootstrap";
 import "../styles/index.scss";
 
 // your own components
-// previous component in boilerplate import { Home } from "./component/home.js";
 function SimpleCounter(props) {
 	return (
 		<div className="Counter">
 			<div className="calendar">
-				<i className="far-fa-clock" />
+				<FontAwesomeIcon icon={faClock} />
 			</div>
 			<div className="four">{props.digitFour % 10}</div>
 			<div className="tree">{props.digitThree % 10}</div>
