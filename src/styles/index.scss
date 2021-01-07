@@ -12,12 +12,16 @@
 
 */
 
-
+.Counter{
+    text-align:center;
+    background:black;
+  }
 .Counter div{
     display: inline-block;
-     font-size:60px;
+    font-size:60px;
     line-height:60px;
     background: black;
     color: white;
     padding: 10px;
+    margin:3px;
 }
