@@ -25,12 +25,9 @@ function SimpleCounter(props) {
 				<div className="one">{props.digitOne % 10}</div>
 			</div>
 			<div className="GroupButtons pl-4 pb-3">
-				<div
-					type="button"
-					className="btn btn-dark m-2 "
-					onClick={toggle}>
-					{isActive ? "Pause" : "Start"}
-				</div>
+				<div type="button" className="btn btn-dark m-2 " />
+				Start
+                </div>
 				<div type="button" className="btn btn-dark m-2">
 					Stop
 				</div>
