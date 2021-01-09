@@ -11,17 +11,33 @@ import "bootstrap";
 //include your index.scss file into the bundle
 import "../styles/index.scss";
 
-// your own components
+//render your react application
 function SimpleCounter(props) {
 	return (
-		<div className="Counter">
-			<div className="calendar">
-				<FontAwesomeIcon icon={faClock} />
+		<div className="Container">
+			<div className="Counter">
+				<div className="calendar">
+					<FontAwesomeIcon icon={faClock} />
+				</div>
+				<div className="four">{props.digitFour % 10}</div>
+				<div className="tree">{props.digitThree % 10}</div>
+				<div className="two">{props.digitTwo % 10}</div>
+				<div className="one">{props.digitOne % 10}</div>
 			</div>
-			<div className="four">{props.digitFour % 10}</div>
-			<div className="tree">{props.digitThree % 10}</div>
-			<div className="two">{props.digitTwo % 10}</div>
-			<div className="one">{props.digitOne % 10}</div>
+			<div className="GroupButtons pl-4 pb-3">
+				<div
+					type="button"
+					className="btn btn-dark m-2 "
+					onClick={toggle}>
+					{isActive ? "Pause" : "Start"}
+				</div>
+				<div type="button" className="btn btn-dark m-2">
+					Stop
+				</div>
+				<div type="button" className="btn btn-dark m-2" onClick={reset}>
+					Reset
+				</div>
+			</div>
 		</div>
 	);
 }
@@ -34,6 +50,11 @@ SimpleCounter.propTypes = {
 };
 
 let counter = 0;
+
+function reset() {
+	counter = 0;
+}
+
 setInterval(function() {
 	const four = Math.floor(counter / 10000);
 	const three = Math.floor(counter / 1000);
