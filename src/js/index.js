@@ -36,7 +36,8 @@ function SimpleCounter(props) {
 					id="stop"
 					type="button"
 					className="btn btn-dark m-2"
-					onClick={stop}>
+					//onClick={stop}
+				>
 					Stop
 				</div>
 				<div
@@ -67,7 +68,7 @@ function reset() {
 
 function start() {
 	if (counter == 0) {
-		document.getElementById("start").classList.add("disabled");
+		//document.getElementById("start").classList.add("disabled");
 		interval = setInterval(function() {
 			const four = Math.floor(counter / 10000);
 			const three = Math.floor(counter / 1000);
@@ -89,10 +90,10 @@ function start() {
 	}
 }
 
-function stop() {
+/*function stop() {
 	//remove class disabled
 	document.getElementById("start").classList.remove("disabled");
 	clearInterval(interval);
-}
+}*/
 
 start();
