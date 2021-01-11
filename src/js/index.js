@@ -11,8 +11,9 @@ import "bootstrap";
 //include your index.scss file into the bundle
 import "../styles/index.scss";
 
-//render your react application
+//render simple counter application
 function SimpleCounter(props) {
+	//html
 	return (
 		<div className="Container">
 			<div className="Counter">
@@ -24,34 +25,11 @@ function SimpleCounter(props) {
 				<div className="two">{props.digitTwo % 10}</div>
 				<div className="one">{props.digitOne % 10}</div>
 			</div>
-			<div className="GroupButtons pl-4 pb-3">
-				<div
-					id="start"
-					type="button"
-					className="btn btn-dark m-2"
-					onClick={start}>
-					Start
-				</div>
-				<div
-					id="stop"
-					type="button"
-					className="btn btn-dark m-2"
-					//onClick={stop}
-				>
-					Stop
-				</div>
-				<div
-					id="reset"
-					type="button"
-					className="btn btn-dark m-2"
-					onClick={reset}>
-					Reset
-				</div>
-			</div>
 		</div>
 	);
 }
 
+//props
 SimpleCounter.propTypes = {
 	digitFour: PropTypes.number,
 	digitThree: PropTypes.number,
@@ -59,41 +37,103 @@ SimpleCounter.propTypes = {
 	digitOne: PropTypes.number
 };
 
+//counter to 0
 let counter = 0;
 let interval = null;
+let timerstarted = true;
 
+//function for reset button
 function reset() {
 	counter = 0;
 }
 
+//This function is called from the "start" button and when the page is loaded
 function start() {
-	if (counter == 0) {
-		//document.getElementById("start").classList.add("disabled");
-		interval = setInterval(function() {
-			const four = Math.floor(counter / 10000);
-			const three = Math.floor(counter / 1000);
-			const two = Math.floor(counter / 100);
-			const one = Math.floor(counter / 10);
-			counter++;
+	//	if (counter == 0) {
+	console.log(document.getElementById("start"), "Aquí");
+	interval = setInterval(function() {
+		const four = Math.floor(counter / 10000);
+		const three = Math.floor(counter / 1000);
+		const two = Math.floor(counter / 100);
+		const one = Math.floor(counter / 10);
+		counter++;
+		//startdisabled = "btn btn-dark m-2 disabled";
 
-			//render your react application
-			ReactDOM.render(
+		//render your react application
+		//pausa no es cierta entoces renderiza span                             de lo contrario renderiza este
+		/*	{
+			!timerstarted && (
+				<span>
+					{" "}
+					<b>Play</b> /Paused{" "}
+				</span>
+			);
+		}
+		{
+			pause && (
+				<span>
+					{" "}
+					Play/ <b>Paused</b>{" "}
+				</span>
+			);
+		}*/
+		ReactDOM.render(
+			<>
 				<SimpleCounter
 					digitOne={one}
 					digitTwo={two}
 					digitThree={three}
 					digitFour={four}
-				/>,
-				document.querySelector("#app")
-			);
-		}, 100);
-	}
+				/>
+				<div className="GroupButtons pl-4 pb-3">
+					{/* control k c // control k u */}
+					{timerstarted && (
+						<div
+							id="start"
+							type="button"
+							className="btn btn-dark m-2"
+							disabled={true}
+							onClick={() => {
+								start;
+								timerstarted = !timerstarted;
+								console.log(timerstarted);
+							}}>
+							Start
+						</div>
+					)}
+					{!timerstarted && (
+						<div
+							id="stop"
+							type="button"
+							className="btn btn-dark m-2"
+							onClick={() => {
+								stop;
+								timerstarted = !timerstarted;
+								console.log(timerstarted);
+							}}>
+							Stop
+						</div>
+					)}
+					<div
+						id="reset"
+						type="button"
+						className="btn btn-dark m-2"
+						onClick={reset}>
+						Reset
+					</div>
+				</div>
+			</>,
+			document.querySelector("#app")
+		);
+	}, 100);
+	//}
 }
 
-/*function stop() {
+function stop() {
 	//remove class disabled
-	document.getElementById("start").classList.remove("disabled");
+	//document.getElementById("start").classList.remove("disabled");
 	clearInterval(interval);
-}*/
+	//si función stop puede ser la misma pero sin aññadir counter++;
+}
 
 start();
