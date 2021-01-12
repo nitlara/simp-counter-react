@@ -7,7 +7,6 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //include bootstrap npm library into the bundle
 import "bootstrap";
-
 //include your index.scss file into the bundle
 import "../styles/index.scss";
 
@@ -28,7 +27,6 @@ function SimpleCounter(props) {
 		</div>
 	);
 }
-
 //props
 SimpleCounter.propTypes = {
 	digitFour: PropTypes.number,
@@ -36,47 +34,26 @@ SimpleCounter.propTypes = {
 	digitTwo: PropTypes.number,
 	digitOne: PropTypes.number
 };
-
 //counter to 0
 let counter = 0;
 let interval = null;
-let timerstarted = true;
+let timerstarted = false;
 
-//function for reset button
-function reset() {
-	counter = 0;
+//function for stop button
+function stop() {
+	clearInterval(interval);
 }
 
 //This function is called from the "start" button and when the page is loaded
 function start() {
 	//	if (counter == 0) {
-	console.log(document.getElementById("start"), "Aquí");
 	interval = setInterval(function() {
 		const four = Math.floor(counter / 10000);
 		const three = Math.floor(counter / 1000);
 		const two = Math.floor(counter / 100);
 		const one = Math.floor(counter / 10);
 		counter++;
-		//startdisabled = "btn btn-dark m-2 disabled";
 
-		//render your react application
-		//pausa no es cierta entoces renderiza span                             de lo contrario renderiza este
-		/*	{
-			!timerstarted && (
-				<span>
-					{" "}
-					<b>Play</b> /Paused{" "}
-				</span>
-			);
-		}
-		{
-			pause && (
-				<span>
-					{" "}
-					Play/ <b>Paused</b>{" "}
-				</span>
-			);
-		}*/
 		ReactDOM.render(
 			<>
 				<SimpleCounter
@@ -85,18 +62,16 @@ function start() {
 					digitThree={three}
 					digitFour={four}
 				/>
-				<div className="GroupButtons pl-4 pb-3">
-					{/* control k c // control k u */}
+				{/* aunque finalmente no se use esto nos permitiria que start y stop se intercanviaran e hicieran distas funciones */}
+				<div className="GroupButtons pl-5 pb-3">
 					{timerstarted && (
 						<div
 							id="start"
 							type="button"
 							className="btn btn-dark m-2"
-							disabled={true}
 							onClick={() => {
-								start;
+								start();
 								timerstarted = !timerstarted;
-								console.log(timerstarted);
 							}}>
 							Start
 						</div>
@@ -107,19 +82,19 @@ function start() {
 							type="button"
 							className="btn btn-dark m-2"
 							onClick={() => {
-								stop;
-								timerstarted = !timerstarted;
-								console.log(timerstarted);
+								clearInterval(interval);
+								timerstarted;
 							}}>
 							Stop
 						</div>
 					)}
+
 					<div
-						id="reset"
+						id="resume"
 						type="button"
 						className="btn btn-dark m-2"
-						onClick={reset}>
-						Reset
+						onClick={start}>
+						Resume
 					</div>
 				</div>
 			</>,
@@ -129,11 +104,6 @@ function start() {
 	//}
 }
 
-function stop() {
-	//remove class disabled
-	//document.getElementById("start").classList.remove("disabled");
-	clearInterval(interval);
-	//si función stop puede ser la misma pero sin aññadir counter++;
-}
-
 start();
+
+//
